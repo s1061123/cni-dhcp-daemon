@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kube-dhcp-ds-amd64
@@ -8,6 +8,10 @@ metadata:
     tier: node
     app: dhcp
 spec:
+  selector:
+    matchLabels:
+      tier: node
+      app: dhcp
   template:
     metadata:
       labels:
@@ -34,3 +38,10 @@ spec:
             memory: "50Mi"
         securityContext:
           privileged: true
+        volumeMounts:
+        - name: host
+          mountPath: /host
+      volumes:
+        - name: host
+          hostPath:
+            path: /
