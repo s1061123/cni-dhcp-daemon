@@ -20,11 +20,10 @@ spec:
     spec:
       hostNetwork: true
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       tolerations:
       - operator: Exists
         effect: NoSchedule
-      # serviceAccountName: dhcp
       containers:
       - name: kube-dhcp
         # Based on: https://github.com/s1061123/cni-dhcp-daemon/blob/master/Dockerfile
